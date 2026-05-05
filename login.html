@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+</head>
+<body>
+    <h2>Crie sua conta</h2>
+  
+    <form id="formCadastro">
+        <label for="nome">Nome Completo:</label><br>
+        <input type="text" id="nome" required><br><br>
+
+        <label for="email">Gmail:</label><br>
+        <input type="email" id="email" placeholder="exemplo@gmail.com" required><br><br>
+
+        <label for="senha">Senha de usuário:</label><br>
+        <input type="password" id="senha" required><br><br>
+
+        <label for="confirmar_senha">Confirmar senha:</label><br>
+        <input type="password" id="confirmar_senha" required><br><br>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <p id="mensagem"></p>
+
+    <script>
+        const form = document.getElementById('formCadastro');
+        const msg = document.getElementById('mensagem');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); 
+
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+            const confirma = document.getElementById('confirmar_senha').value;
+
+           
+            if (senha !== confirma) {
+                msg.innerText = "As senhas não coincidem!";
+                msg.style.color = "red";
+                return;
+            }
+
+           
+            const dadosUsuario = { nome, email, senha };
+            localStorage.setItem('usuario', JSON.stringify(dadosUsuario));
+
+            msg.innerText = "Cadastro realizado! Agora tente logar.";
+            msg.style.color = "green";
+            
+           
+            form.reset();
+        });
+    </script>
+</body>
+</html>
